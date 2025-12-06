@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #0a0a15;
+    font-family: 'Nanum Gothic', sans-serif;
+    position: relative;
+}
+
+/* 숨겨진 웹캠 비디오 */
+#webcam {
+    display: none;
+}
+
+/* 캔버스 */
+#canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: none;
+}
+
+/* LIVE 인디케이터 */
+.live-indicator {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 1000;
+    padding: 12px 24px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 50px;
+    font-size: 14px;
+    color: white;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: pulse 2s infinite;
+}
+
+.live-indicator.hidden {
+    display: none;
+}
+
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #4ade80;
+    animation: blink 1.5s infinite;
+}
+
+/* 에러 메시지 */
+.error-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 24px 32px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 16px;
+    color: #fff;
+    font-size: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    max-width: 80%;
+    text-align: center;
+    z-index: 1001;
+}
+
+.error-message.hidden {
+    display: none;
+}
+
+/* 하단 안내 */
+.bottom-guide {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    z-index: 1000;
+}
+
+/* 애니메이션 */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* 반응형 디자인 - 태블릿 */
+@media (max-width: 1024px) {
+    .live-indicator {
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .bottom-guide {
+        bottom: 20px;
+        font-size: 11px;
+        padding: 8px 16px;
+    }
+    
+    .error-message {
+        padding: 20px 28px;
+        font-size: 15px;
+        max-width: 85%;
+    }
+}
+
+/* 반응형 디자인 - 모바일 */
+@media (max-width: 768px) {
+    #canvas {
+        cursor: auto;
+    }
+    
+    .live-indicator {
+        top: 15px;
+        right: 15px;
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .indicator-dot {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .bottom-guide {
+        bottom: 15px;
+        font-size: 10px;
+        padding: 6px 14px;
+    }
+    
+    .error-message {
+        padding: 18px 24px;
+        font-size: 14px;
+        max-width: 90%;
+    }
+}
+
+/* 반응형 디자인 - 작은 모바일 */
+@media (max-width: 480px) {
+    .live-indicator {
+        top: 10px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: 11px;
+        gap: 6px;
+    }
+    
+    .bottom-guide {
+        bottom: 10px;
+        font-size: 9px;
+        padding: 5px 12px;
+    }
+}
+
+/* 가로 모드 최적화 */
+@media (orientation: landscape) and (max-height: 500px) {
+    .live-indicator {
+        top: 10px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+    
+    .bottom-guide {
+        display: none;
+    }
+}
