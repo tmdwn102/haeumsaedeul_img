@@ -53,7 +53,8 @@ class Shape {
         this.x += this.vx;
         this.y += this.vy;
         
-        this.life -= 0.003;
+        // ✨ 수정된 부분: this.life 감소 속도를 높여 4초(1/240)만에 사라지도록 설정
+        this.life -= 0.0083; 
         this.alpha = this.life * 0.9;
         
         // 크기 변화
@@ -229,21 +230,22 @@ function animate() {
                 let size, colorIndex;
                 const rand = Math.random();
                 
+                // ✨ 수정된 부분: 크기 기준값 및 볼륨 배수 감소
                 if (rand < 0.3) {
                     // 저음 - 큰 물방울
-                    size = 30 + bassAvg * 1.0;
+                    size = 15 + bassAvg * 0.5;
                     colorIndex = Math.floor(Math.random() * 3); // 퍼플 계열
                 } else if (rand < 0.6) {
                     // 중음 - 중간 물방울
-                    size = 20 + midAvg * 0.7;
+                    size = 10 + midAvg * 0.4;
                     colorIndex = 3 + Math.floor(Math.random() * 3); // 블루 계열
                 } else if (rand < 0.85) {
                     // 고음 - 작은 물방울
-                    size = 12 + highAvg * 0.4;
+                    size = 6 + highAvg * 0.2;
                     colorIndex = 6 + Math.floor(Math.random() * 2); // 시안/그린 계열
                 } else {
                     // 아주 작은 점들
-                    size = 3 + Math.random() * 5;
+                    size = 1 + Math.random() * 3;
                     colorIndex = Math.floor(Math.random() * colorPalette.length);
                 }
                 
