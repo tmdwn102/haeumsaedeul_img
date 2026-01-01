@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>가로형 배너 슬라이더</title>
 
-  <!-- Font Awesome CDN for Icons -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
@@ -18,7 +18,7 @@
     .slider {
       width: calc(100% - 20px);
       max-width: 1600px;
-      aspect-ratio: 3/1;
+      aspect-ratio: 3 / 1;
       margin: 20px auto;
       overflow: hidden;
       position: relative;
@@ -27,7 +27,6 @@
 
     .slides {
       display: flex;
-      width: 100%;
       height: 100%;
       transition: transform 3.5s ease-in-out;
     }
@@ -44,19 +43,19 @@
       object-fit: cover;
     }
 
-    /* 소셜 링크 영역 */
+    /* 소셜 링크 */
     .social-links {
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-top: 20px; /* 슬라이더와의 간격 */
+      margin-top: 20px;
       margin-bottom: 30px;
     }
 
     .social-icon {
       width: 40px;
       height: 40px;
-      background-color: #ccc; /* 연회색 */
+      background-color: #ccc;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -77,20 +76,23 @@
 
   <div class="slider">
     <div class="slides" id="slides">
-      <div class="slide"><img src="https://tmdwn102.github.io/haeumsaedeul_img//HAEUM.png" alt="image1"></div>
-      <div class="slide"><img src="https://tmdwn102.github.io/haeumsaedeul_img/SAEDEUL.jpg" alt="image2"></div>
+      <div class="slide">
+        <img src="https://tmdwn102.github.io/haeumsaedeul_img/HAEUM.png" alt="image1">
+      </div>
+      <div class="slide">
+        <img src="https://tmdwn102.github.io/haeumsaedeul_img/SAEDEUL.jpg" alt="image2">
+      </div>
     </div>
   </div>
 
-  <!-- 소셜 링크 -->
   <div class="social-links">
-    <a class="social-icon" href="https://www.instagram.com/haeum_saedeul" target="_blank" aria-label="Instagram">
+    <a class="social-icon" href="https://www.instagram.com/haeum_saedeul" target="_blank">
       <i class="fab fa-instagram"></i>
     </a>
-    <a class="social-icon" href="mailto:goyang.hu@gmail.com" target="_blank" aria-label="Email">
+    <a class="social-icon" href="mailto:goyang.hu@gmail.com" target="_blank">
       <i class="fas fa-envelope"></i>
     </a>
-    <a class="social-icon" href="https://www.youtube.com/@haeum_saedeul" target="_blank" aria-label="YouTube">
+    <a class="social-icon" href="https://www.youtube.com/@haeum_saedeul" target="_blank">
       <i class="fab fa-youtube"></i>
     </a>
   </div>
@@ -101,9 +103,12 @@
     let index = 0;
     let interval;
 
+    // ⭐ 슬라이드 개수에 맞게 width 자동 설정
+    slides.style.width = `${totalSlides * 100}%`;
+
     function showSlide(i) {
       index = i % totalSlides;
-      slides.style.transform = `translateX(-${index * 100}%)`;
+      slides.style.transform = `translateX(-${index * (100 / totalSlides)}%)`;
     }
 
     function showNextSlide() {
@@ -117,8 +122,9 @@
 
     resetInterval();
 
-    document.querySelector('.slider').addEventListener('mouseenter', () => clearInterval(interval));
-    document.querySelector('.slider').addEventListener('mouseleave', () => resetInterval());
+    const slider = document.querySelector('.slider');
+    slider.addEventListener('mouseenter', () => clearInterval(interval));
+    slider.addEventListener('mouseleave', resetInterval);
   </script>
 
 </body>
